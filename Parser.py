@@ -34,12 +34,3 @@ class Counter(dict):
     def __missing__(self, key):
          return 0
 
-
-def main():
-    x = Parser()
-    print(x.data)
-    print(x.letterStatistic)
-   # print(x.dataDictList)
-
-if __name__ == "__main__":
-    main()

@@ -1,10 +1,9 @@
 from Parser import Parser
 
 import collections
-
 class TreeBuilder:
     def __init__(self, dict):
-        self.dictToCode = collections.OrderedDict(sorted(dict.items(), key=lambda dict: dict[1], reverse=True))
+        self.dictToCode = collections.OrderedDict(sorted(dict.items(), key = lambda dict: dict[1], reverse=True))
         self.nodeList = []
 
     def Run(self):
