@@ -1,6 +1,11 @@
+import sys as system
+import FileReader as fr
+
 class Parser:
     def __init__(self):
-        self.data = "abcdefgdd"
+        reader = fr.FileReader(system.argv[1])
+        self.data = reader.data
+        self.letterStatistic = reader.CountCharactersInData()
         self.minWindowSize = 1
         self.maxWindowSize = 2
         self.dataDictList = {}
@@ -28,3 +33,13 @@ class Parser:
 class Counter(dict):
     def __missing__(self, key):
          return 0
+
+
+def main():
+    x = Parser()
+    print(x.data)
+    print(x.letterStatistic)
+   # print(x.dataDictList)
+
+if __name__ == "__main__":
+    main()
