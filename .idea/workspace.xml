@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="229cfca4-3da8-49cf-8384-1a0fd023705a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Kompresja.iml" afterPath="$PROJECT_DIR$/.idea/Kompresja.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Coder.py" afterPath="$PROJECT_DIR$/Coder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileReader.py" afterPath="$PROJECT_DIR$/FileReader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser.py" afterPath="$PROJECT_DIR$/Parser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TreeBuilder.py" afterPath="$PROJECT_DIR$/TreeBuilder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp.py" afterPath="$PROJECT_DIR$/temp.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TreeBuilder.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TreeBuilder.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TreeBuilder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="54" selection-end-column="29" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -60,14 +57,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Coder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+            <state relative-caret-position="637">
+              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
+                <marker date="1481856299941" expanded="true" signature="99:911" ph="..." />
+                <marker date="1481856299941" expanded="true" signature="902:911" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="temp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/temp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,10 +105,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/OptHandler.py" />
-        <option value="$PROJECT_DIR$/TreeBuilder.py" />
         <option value="$PROJECT_DIR$/Parser.py" />
         <option value="$PROJECT_DIR$/FileReader.py" />
+        <option value="$PROJECT_DIR$/temp.py" />
         <option value="$PROJECT_DIR$/Coder.py" />
+        <option value="$PROJECT_DIR$/TreeBuilder.py" />
       </list>
     </option>
   </component>
@@ -128,7 +138,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager" selected="Python.Parser">
+  <component name="RunManager" selected="Python.Coder (1)">
     <configuration default="false" name="Parser" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -357,10 +367,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Parser" />
-        <item index="1" class="java.lang.String" itemvalue="Python.FileReader" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Coder (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Coder" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Coder (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Coder" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Parser" />
+        <item index="3" class="java.lang.String" itemvalue="Python.FileReader" />
         <item index="4" class="java.lang.String" itemvalue="Python._pydev_execfile" />
       </list>
     </recent_temporary>
@@ -383,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1481762664444</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="jacka commit">
+      <created>1481845347885</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1481845347885</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -401,10 +418,10 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20566948" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20168856" sideWeight="0.50208336" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20168856" sideWeight="0.49791667" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32833022" sideWeight="0.296875" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20168856" sideWeight="0.49791667" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32833022" sideWeight="0.49791667" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32833022" sideWeight="0.703125" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22707424" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -460,7 +477,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="File reader czyta argument wrzucony jako sys.arg jako sciezke do pliku i wczytuje do parser. data dane z calego pliku jako wielki string, do pola letterstatisic wpisuje policzone powtórzenia kolejnych znaków we wczytanym stringu (kolejnosc znakow jest taka jak w string.printables)" />
-    <option name="LAST_COMMIT_MESSAGE" value="File reader czyta argument wrzucony jako sys.arg jako sciezke do pliku i wczytuje do parser. data dane z calego pliku jako wielki string, do pola letterstatisic wpisuje policzone powtórzenia kolejnych znaków we wczytanym stringu (kolejnosc znakow jest taka jak w string.printables)" />
+    <MESSAGE value="jacka commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="jacka commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -509,6 +527,8 @@
           <caret line="1" column="48" lean-forward="false" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="48" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
+            <marker date="1481856299941" expanded="true" signature="99:911" ph="..." />
+            <marker date="1481856299941" expanded="true" signature="902:911" ph="..." />
           </folding>
         </state>
       </provider>
@@ -539,6 +559,8 @@
           <caret line="1" column="48" lean-forward="false" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="48" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
+            <marker date="1481856299941" expanded="true" signature="99:911" ph="..." />
+            <marker date="1481856299941" expanded="true" signature="902:911" ph="..." />
           </folding>
         </state>
       </provider>
@@ -569,6 +591,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
+            <marker date="1481856299941" expanded="true" signature="99:911" ph="..." />
+            <marker date="1481856299941" expanded="true" signature="902:911" ph="..." />
           </folding>
         </state>
       </provider>
@@ -599,6 +623,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
+            <marker date="1481856299941" expanded="true" signature="99:911" ph="..." />
+            <marker date="1481856299941" expanded="true" signature="902:911" ph="..." />
           </folding>
         </state>
       </provider>
@@ -629,6 +655,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
+            <marker date="1481856299941" expanded="true" signature="99:911" ph="..." />
+            <marker date="1481856299941" expanded="true" signature="902:911" ph="..." />
           </folding>
         </state>
       </provider>
@@ -674,22 +702,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TreeBuilder.py">
+    <entry file="file://$PROJECT_DIR$/temp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Coder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+        <state relative-caret-position="637">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
+            <marker date="1481856299941" expanded="true" signature="99:911" ph="..." />
+            <marker date="1481856299941" expanded="true" signature="902:911" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TreeBuilder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="54" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

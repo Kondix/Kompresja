@@ -1,7 +1,21 @@
+import math
+
+
+transSymbols = dict()
+
 charactersList = []
-for i in range(1,255): 	#readable ascii
+for i in range(33,127): 	#readable ascii
 	char = chr(i)
 	charactersList.append(char)
+charactersList = set(charactersList)
+
+def getFirstUnusedSymbol(dict, transSymbols):
+	unused = charactersList - set(dict.keys())   
+	unused = unused - set(transSymbols.keys())
+	if len(sorted(unused)) > 0:
+		return(sorted(unused)[0])
+	else:
+		return('†')
 
 def getPlainTextFromFile(filename):
 	try:
@@ -11,11 +25,12 @@ def getPlainTextFromFile(filename):
 		print('Error with input file.')
 	return(text)
 
-def getDoubleCharSet(text):
+def getNCharSet(text):
 	charList = []
-	for i in range(len(text)-1):
-		symbol = text[i] + text[i+1]
-		charList.append(symbol)
+	for k in range(0,int(math.sqrt(len(text)))):	
+		for i in range(len(text)-(k+1)):
+			symbol = text[i:(i+k+2)]
+			charList.append(symbol)
 	charList = sorted(set(charList))
 	return(charList)
 
@@ -28,8 +43,8 @@ def getTextStatistics(text):
 	statsDict = dict(zip(characters, number))
 	return(statsDict)
 
-def getDoubleCharStatistics(text):
-	characters = getDoubleCharSet(text)
+def getNCharStatistics(text):
+	characters = getNCharSet(text)
 	number = []
 	for char in characters:
 		count = text.count(char)
@@ -37,46 +52,36 @@ def getDoubleCharStatistics(text):
 	statsDict = dict(zip(characters, number))
 	return(statsDict)
 
-# def prepareDictionaryFile(dict):
-# 	maxNumber = dict[max(dict, key=dict.get)]	#maximum number of the symbol in text
-# 	maxNumberHex = (hex(maxNumber)[2:])
-# 	if len(maxNumberHex)% 2 == 1:		#for padding
-# 		maxNumberHex = '0' + maxNumberHex
-# 	#content = []
-# 	for symbol, value in dict.items():
-# 		number = ''
-# 		hexValue = hex(value)[2:]
-# 		for i in range(len(maxNumberHex)-len(hexValue)):	#dlugosc maksymalnego - dlugosc kodowanego, np. 0xffff - 0x3 dopisze 3 zera: 0x0003  
-# 			hexValue = '0' + hexValue
-# 		for i in range(int(len(maxNumberHex)/2)):
-# 			hexVal = hexValue[i] + hexValue[i+1]
-# 			char = chr(int(hexVal, 16))
-# 			number += char
-# 			i+=1
-# 		#content.append([number, symbol])
-# 		#for item in content:
-# 		with open(('dict\\' + item[1], 'w+')) as f:
-# 			f.write(item)
-# 	return(content)
-
-def prepareDictionaryFile(dict, dirName):
+def prepareDictionaryFile(dict, filename, transSymbols):
 	maxNumber = dict[max(dict, key=dict.get)]	#maximum number of the symbol in text
-	size = 0
+	#maxNumberHex = (hex(maxNumber)[2:])
+	#if len(maxNumberHex)% 2 == 1:		#for padding
+	#	maxNumberHex = '0' + maxNumberHex
+	contentSymbol = ''
+	contentNumber = ''
+	length = 0
+	countNumber = 0
 	for symbol, value in dict.items():
-		#size += len(symbol)
-		hexValue = hex(value)[2:]
-		number = ''
-		if len(hexValue)% 2 == 1:		#for padding
-			hexValue = '0' + hexValue
-		for i in range(int(len(hexValue)/2)):
-			hexVal = hexValue[i] + hexValue[i+1]
-			char = chr(int(hexVal, 16))
-			i+=1
-			number += char
-		with open((dirName + '\\' + symbol), 'a+') as f:
-			f.write(number)
-			size += len(number)
-	return(size)
+		#number = ''
+		# hexValue = hex(value)[2:]
+		# for i in range(len(maxNumberHex)-len(hexValue)):	#dlugosc maksymalnego - dlugosc kodowanego, np. 0xffff - 0x3 dopisze 3 zera: 0x0003  
+		# 	hexValue = '0' + hexValue
+		# for i in range(int(len(maxNumberHex)/2)):
+		# 	hexVal = hexValue[i] + hexValue[i+1]
+		# 	char = chr(int(hexVal, 16))
+		# 	number += char
+		# 	i+=1
+		while symbol in transSymbols.keys():
+			print(symbol)
+			symbol = transSymbols[symbol]
+		contentSymbol += (symbol + '†')
+		contentNumber += (str(value) + '†')
+		with open( filename + 'Symbol.txt', 'w+') as f:
+			f.write(contentSymbol)
+		with open( filename + 'Number.txt', 'w+') as f:
+			f.write(contentNumber)
+	totalLength = length + len(dict.keys())
+	return(totalLength)
 
 
 	
@@ -88,14 +93,25 @@ def prepareDictionaryFile(dict, dirName):
 
 # myMap = getTextStatistics(text) 
 # #print(myMap)
+# print(prepareDictionaryFile(myMap, 'old'))
 
-# myMap = getDoubleCharStatistics(text)
+
+
+# myMap = getNCharStatistics(text)
 # #print(myMap)
 
-# topDoubleChar = max(myMap, key=myMap.get)
-# #print(topDoubleChar)
+# mostFrequentSymbol = max(myMap, key=myMap.get)
+# #print(mostFrequentSymbol)
 
-# newText = text.replace(topDoubleChar, 'x')
-# #print(newText)
+# newSymbol = getFirstUnusedSymbol(myMap)
+# if newSymbol == '†':
+# 	pass
+# else:
+# 	newText = text.replace(mostFrequentSymbol, newSymbol)
 
-# print(prepareDictionaryFile(myMap,'olddict'))
+# transSymbols.update({newSymbol:mostFrequentSymbol})
+
+# myMap = getTextStatistics(newText) 
+# #print(myMap)
+# print(prepareDictionaryFile(myMap, 'new'))
+

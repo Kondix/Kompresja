@@ -31,35 +31,64 @@ class Coder():
 
     def toFile(self, input, filename):
         content = ''
+        if (len(input)<=8):
+            return(1)
+        it=0
         for i in range(int(len(input)/8)):
-            block = input[i:i+8]
-            i += 7
+            block = input[it:it+8]
             number = int(block,2)
-            content += chr(number)
-        #content = n.to_bytes((n.bit_length() + 7) // 8, 'big').decode('binary')
+            content += (str(number) + ' ')
+            it += 8
+        block = input[it:]
+        if block != '':
+            number = int(block,2)
+        content += (str(number) + ' ')
         with open(filename, 'w+') as f:
             f.write(content)
-        return(None)
+        return(int(len(input)/8)+1)
 
 
-def main():
-    input = 'input.txt' ##todo argv sys
-    text = getPlainTextFromFile(input)
+
+
+
+input = 'input.txt' ##todo argv sys
+text = getPlainTextFromFile(input)
+optimalSize = 999999999999999999999999999
+continueCondition = True
+it=0
+
+while continueCondition:
     singleCharDict = getTextStatistics(text)
-
     treeBuilder = TreeBuilder(singleCharDict)
     treeBuilder.Run()
     coder = Coder(treeBuilder.GetRoot()[0])
     coder.Run()
     msg = coder.code(text)
-    print(msg)
+    dictSize = prepareDictionaryFile(singleCharDict, 'new', transSymbols)
+    codeSize = coder.toFile(msg,'outputFile')
+    if optimalSize <= (dictSize + codeSize):
+        break
+    print(singleCharDict)
+    optimalSize = (dictSize + codeSize)
+    bestCharDict = singleCharDict
+    multiCharDict = getNCharStatistics(text)
+    mostFrequentSymbol = max(multiCharDict, key=multiCharDict.get)
+    newSymbol = getFirstUnusedSymbol(multiCharDict, transSymbols)
+    if newSymbol == '†':
+        break
+    text = text.replace(mostFrequentSymbol, newSymbol)
+    transSymbols.update({newSymbol:mostFrequentSymbol})
+    it += 1
+    if it==100:
+        break
+print(it)
 
-    coder.toFile(msg,'outputFile')
+print(transSymbols)
 
-
-if __name__ == "__main__":
-    main()
-
-
-
-
+treeBuilder = TreeBuilder(bestCharDict)
+treeBuilder.Run()
+coder = Coder(treeBuilder.GetRoot()[0])
+coder.Run()
+msg = coder.code(text)
+dictSize = prepareDictionaryFile(bestCharDict, 'new', transSymbols)
+codeSize = coder.toFile(msg,'outputFile')
