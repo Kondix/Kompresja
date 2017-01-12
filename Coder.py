@@ -1,6 +1,9 @@
 from TreeBuilder import TreeBuilder, HoffmanNode
 from temp import *
 import binascii
+import time
+from struct import pack
+import os
 
 class Coder():
     def __init__(self, treeRoot):
@@ -29,33 +32,32 @@ class Coder():
             output += self[char]
         return(output)
 
-    def toFile(self, input, filename):
-        content = ''
-        if (len(input)<=8):
-            return(1)
+    def toFile(self, input, name):
+        content = []
         it=0
-        for i in range(int(len(input)/8)):
-            block = input[it:it+8]
+        paddingLen = 32 - (len(input)%32)
+        padding = '0' * paddingLen
+        input = input + padding
+        for i in range(int(len(input)/32)):
+            block = input[it:it+32]
             number = int(block,2)
-            content += (str(number) + ' ')
-            it += 8
-        block = input[it:]
-        if block != '':
-            number = int(block,2)
-        content += (str(number) + ' ')
-        with open(filename, 'w+') as f:
-            f.write(content)
-        return(int(len(input)/8)+1)
+            content.append(number)
+            it += 32         
+        with open(name, "wb") as file:
+            for i in content:
+                file.write(pack("<I", i))
+        ret = os.path.getsize(name)
+        return(ret)
+
+##main
 
 
+input = 'input.txt'
 
-
-
-input = 'input.txt' ##todo argv sys
 text = getPlainTextFromFile(input)
-optimalSize = 999999999999999999999999999
+optimalSize = os.path.getsize(input) #999999999999999999999999999
 continueCondition = True
-it=0
+it = 0
 
 while continueCondition:
     singleCharDict = getTextStatistics(text)
@@ -65,25 +67,23 @@ while continueCondition:
     coder.Run()
     msg = coder.code(text)
     dictSize = prepareDictionaryFile(singleCharDict, 'new', transSymbols)
-    codeSize = coder.toFile(msg,'outputFile')
+    codeSize = coder.toFile(msg,'outputFile'+str(it)+'.bin')
     if optimalSize <= (dictSize + codeSize):
         break
-    print(singleCharDict)
     optimalSize = (dictSize + codeSize)
     bestCharDict = singleCharDict
     multiCharDict = getNCharStatistics(text)
-    mostFrequentSymbol = max(multiCharDict, key=multiCharDict.get)
+    mostFrequentSymbol = maxElement(multiCharDict) #max(multiCharDict, key=multiCharDict.get)
     newSymbol = getFirstUnusedSymbol(multiCharDict, transSymbols)
     if newSymbol == '†':
         break
     text = text.replace(mostFrequentSymbol, newSymbol)
     transSymbols.update({newSymbol:mostFrequentSymbol})
     it += 1
-    if it==100:
+    if it==3:
         break
-print(it)
 
-print(transSymbols)
+
 
 treeBuilder = TreeBuilder(bestCharDict)
 treeBuilder.Run()

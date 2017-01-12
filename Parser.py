@@ -1,5 +1,4 @@
 import sys as system
-import FileReader as fr
 
 class Parser:
     def __init__(self):

@@ -1,4 +1,6 @@
 import math
+from struct import pack
+import os
 
 
 transSymbols = dict()
@@ -27,7 +29,8 @@ def getPlainTextFromFile(filename):
 
 def getNCharSet(text):
 	charList = []
-	for k in range(0,int(math.sqrt(len(text)))):	
+	#for k in range(0,int(math.sqrt(len(text)))):	
+	for k in range(0,1):	
 		for i in range(len(text)-(k+1)):
 			symbol = text[i:(i+k+2)]
 			charList.append(symbol)
@@ -53,26 +56,13 @@ def getNCharStatistics(text):
 	return(statsDict)
 
 def prepareDictionaryFile(dict, filename, transSymbols):
-	maxNumber = dict[max(dict, key=dict.get)]	#maximum number of the symbol in text
-	#maxNumberHex = (hex(maxNumber)[2:])
-	#if len(maxNumberHex)% 2 == 1:		#for padding
-	#	maxNumberHex = '0' + maxNumberHex
+	maxNumber = dict[max(dict, key=dict.get)]	
 	contentSymbol = ''
 	contentNumber = ''
 	length = 0
 	countNumber = 0
 	for symbol, value in dict.items():
-		#number = ''
-		# hexValue = hex(value)[2:]
-		# for i in range(len(maxNumberHex)-len(hexValue)):	#dlugosc maksymalnego - dlugosc kodowanego, np. 0xffff - 0x3 dopisze 3 zera: 0x0003  
-		# 	hexValue = '0' + hexValue
-		# for i in range(int(len(maxNumberHex)/2)):
-		# 	hexVal = hexValue[i] + hexValue[i+1]
-		# 	char = chr(int(hexVal, 16))
-		# 	number += char
-		# 	i+=1
 		while symbol in transSymbols.keys():
-			print(symbol)
 			symbol = transSymbols[symbol]
 		contentSymbol += (symbol + '†')
 		contentNumber += (str(value) + '†')
@@ -80,38 +70,14 @@ def prepareDictionaryFile(dict, filename, transSymbols):
 			f.write(contentSymbol)
 		with open( filename + 'Number.txt', 'w+') as f:
 			f.write(contentNumber)
-	totalLength = length + len(dict.keys())
+	totalLength = os.path.getsize(filename + 'Number.txt') + os.path.getsize( filename + 'Symbol.txt')
 	return(totalLength)
 
-
-	
-
-
-
-# input = 'input.txt' ##todo argv sys
-# text = getPlainTextFromFile(input)
-
-# myMap = getTextStatistics(text) 
-# #print(myMap)
-# print(prepareDictionaryFile(myMap, 'old'))
-
-
-
-# myMap = getNCharStatistics(text)
-# #print(myMap)
-
-# mostFrequentSymbol = max(myMap, key=myMap.get)
-# #print(mostFrequentSymbol)
-
-# newSymbol = getFirstUnusedSymbol(myMap)
-# if newSymbol == '†':
-# 	pass
-# else:
-# 	newText = text.replace(mostFrequentSymbol, newSymbol)
-
-# transSymbols.update({newSymbol:mostFrequentSymbol})
-
-# myMap = getTextStatistics(newText) 
-# #print(myMap)
-# print(prepareDictionaryFile(myMap, 'new'))
-
+def maxElement(d):
+	mostFrequentSymbol = max(d, key=d.get)
+	mostFrequentSymbolValue = d[mostFrequentSymbol]
+	for key in d:
+		if d[key] == mostFrequentSymbolValue:
+			if key < mostFrequentSymbol:
+				mostFrequentSymbol = key
+	return mostFrequentSymbol
