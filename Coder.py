@@ -49,6 +49,7 @@ class Coder():
             it += 32         
         with open(name, "wb") as file:
             for i in content:
+                print(i);
                 file.write(pack("<I", i))
         ret = os.path.getsize(name)
         return(ret)

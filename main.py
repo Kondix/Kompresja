@@ -45,10 +45,10 @@ while continueCondition:
 
 
 
-# treeBuilder = TreeBuilder(bestCharDict)
-# treeBuilder.Run()
-# coder = Coder(treeBuilder.GetRoot()[0])
-# coder.Run()
-# msg = coder.code(bestText)
-# dictSize = prepareDictionaryFile(bestCharDict, 'new', transSymbols)
-# codeSize = coder.toFile(msg,'ostatecznyOutput.bin')
+treeBuilder = TreeBuilder(bestCharDict)
+treeBuilder.Run()
+coder = Coder(treeBuilder.GetRoot()[0])
+coder.Run()
+msg = coder.code(bestText)
+dictSize = prepareDictionaryFile(bestCharDict, 'new', transSymbols)
+codeSize = coder.toFile(msg,'ostatecznyOutput.bin')

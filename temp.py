@@ -62,8 +62,14 @@ def getNCharStatistics(text):
 	statsDict = dict(zip(characters, number))
 	return(statsDict)
 
-def translateDown(transSymbols):
-	pass
+def translateDown(symbol, transSymbols, value = ''):
+	if symbol in transSymbols.keys():
+	for idx in range(len(symbol)):  # for idx, char in enumerate(symbol):
+		if symbol[idx] in transSymbols.keys():
+			value += transSymbols[symbol[idx]]
+		# symbol = transSymbols[symbol[idx:]]
+		else:
+			value += symbol[idx]
 
 def prepareDictionaryFile(dict, filename, transSymbols):
 	maxNumber = dict[max(dict, key=dict.get)]	
