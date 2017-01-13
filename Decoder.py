@@ -32,7 +32,7 @@ for symbol in symbols:
 	seq = coder.codeSingle(symbol)
 	decoderDict.update({seq:symbol})
 
-with open('outputFile1.bin', encoding = "ISO-8859-1") as file:
+with open('ostatecznyOutput.bin', encoding = "ISO-8859-1") as file:
 	content = file.read()
 	b = bytearray(content.encode(encoding = "ISO-8859-1"))
 	out = ''
@@ -40,6 +40,9 @@ with open('outputFile1.bin', encoding = "ISO-8859-1") as file:
 	for idx in range(0, len(content)-5, 4):
 		binaryStream = unpack('<i', b[idx:idx+4])
 		binaryString= str((bin(binaryStream[0]).replace("-", '').replace("0b", '')))
+		paddingLen = 32 - (len(binaryString) % 32)
+		padding = '0' * paddingLen
+		binaryString = binaryString + padding
 		for a in binaryString:
 			match += a
 			if match in coder.getCodeDict().values():
@@ -47,6 +50,5 @@ with open('outputFile1.bin', encoding = "ISO-8859-1") as file:
 					if coder.getCodeDict()[el] == match:
 						out += el
 				match = ''
-
 	print(out)
 

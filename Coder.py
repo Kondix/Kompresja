@@ -50,12 +50,12 @@ class Coder():
         input = input + padding
         for i in range(int(len(input)/32)):
             block = input[it:it+32]
+            # print(block)
             number = int(block,2)
             content.append(number)
             it += 32         
         with open(name, "wb") as file:
             for i in content:
-                print(i);
                 file.write(pack("<I", i))
         ret = os.path.getsize(name)
         return(ret)
