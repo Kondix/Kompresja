@@ -18,9 +18,11 @@ it = 0
 while continueCondition:
     singleCharDict = getTextStatistics(text)
     treeBuilder = TreeBuilder(singleCharDict)
+    print(singleCharDict)
     treeBuilder.Run()
     coder = Coder(treeBuilder.GetRoot()[0])
     coder.Run()
+    coder.printCodeDict()
     msg = coder.code(text)
     #print(coder.codeDict)
     dictSize = prepareDictionaryFile(singleCharDict, 'new', transSymbols)
