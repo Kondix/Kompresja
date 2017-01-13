@@ -36,10 +36,10 @@ with open('outputFile1.bin', encoding = "ISO-8859-1") as file:
 	content = file.read()
 	b = bytearray(content.encode(encoding = "ISO-8859-1"))
 	out = ''
+	match = ''
 	for idx in range(0, len(content)-5, 4):
 		binaryStream = unpack('<i', b[idx:idx+4])
 		binaryString= str((bin(binaryStream[0]).replace("-", '').replace("0b", '')))
-		match = '';
 		for a in binaryString:
 			match += a
 			if match in coder.getCodeDict().values():
