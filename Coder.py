@@ -26,6 +26,12 @@ class Coder():
         if (node.GetSymbol() != None):
             self.codeDict[node.GetSymbol()] = code
 
+    def printCodeDict(self):
+        print (self.codeDict)
+
+    def getCodeDict(self):
+        return self.codeDict
+
     def code(self, text):
         output = ''
         for char in text:
@@ -34,7 +40,7 @@ class Coder():
 
     def codeSingle(self, text):
         output = self[text]
-        return(output)
+        return (output)
 
     def toFile(self, input, name):
         content = []
@@ -54,3 +60,4 @@ class Coder():
         return(ret)
 
 ##main
+
