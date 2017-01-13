@@ -32,6 +32,10 @@ class Coder():
             output += self[char]
         return(output)
 
+    def codeSingle(self, text):
+        output = self[text]
+        return(output)
+
     def toFile(self, input, name):
         content = []
         it=0
@@ -50,45 +54,3 @@ class Coder():
         return(ret)
 
 ##main
-
-
-input = 'input.txt'
-
-text = getPlainTextFromFile(input)
-optimalSize = os.path.getsize(input) #999999999999999999999999999
-continueCondition = True
-it = 0
-
-while continueCondition:
-    singleCharDict = getTextStatistics(text)
-    treeBuilder = TreeBuilder(singleCharDict)
-    treeBuilder.Run()
-    coder = Coder(treeBuilder.GetRoot()[0])
-    coder.Run()
-    msg = coder.code(text)
-    dictSize = prepareDictionaryFile(singleCharDict, 'new', transSymbols)
-    codeSize = coder.toFile(msg,'outputFile'+str(it)+'.bin')
-    if optimalSize <= (dictSize + codeSize):
-        break
-    optimalSize = (dictSize + codeSize)
-    bestCharDict = singleCharDict
-    multiCharDict = getNCharStatistics(text)
-    mostFrequentSymbol = maxElement(multiCharDict) #max(multiCharDict, key=multiCharDict.get)
-    newSymbol = getFirstUnusedSymbol(multiCharDict, transSymbols)
-    if newSymbol == '†':
-        break
-    text = text.replace(mostFrequentSymbol, newSymbol)
-    transSymbols.update({newSymbol:mostFrequentSymbol})
-    it += 1
-    if it==3:
-        break
-
-
-
-treeBuilder = TreeBuilder(bestCharDict)
-treeBuilder.Run()
-coder = Coder(treeBuilder.GetRoot()[0])
-coder.Run()
-msg = coder.code(text)
-dictSize = prepareDictionaryFile(bestCharDict, 'new', transSymbols)
-codeSize = coder.toFile(msg,'outputFile')

@@ -9,9 +9,16 @@ charactersList = []
 for i in range(33,127): 	#readable ascii
 	char = chr(i)
 	charactersList.append(char)
-charactersList = set(charactersList)
+charactersList = set(charactersList) - set(['"','#','$', '%', '&'])
 
-def getFirstUnusedSymbol(dict, transSymbols):
+def isInDict(symbol, transSymbols):
+	bIsInDict = false
+	for idx in range(len(symbol)):
+		if symbol[idx:] in transSymbols.keys():
+			bIsInDict = true
+	return bIsInDict
+
+def getFirstUnusedSymbol(dict, transSymbols ):
 	unused = charactersList - set(dict.keys())   
 	unused = unused - set(transSymbols.keys())
 	if len(sorted(unused)) > 0:
@@ -55,6 +62,9 @@ def getNCharStatistics(text):
 	statsDict = dict(zip(characters, number))
 	return(statsDict)
 
+def translateDown(transSymbols):
+	pass
+
 def prepareDictionaryFile(dict, filename, transSymbols):
 	maxNumber = dict[max(dict, key=dict.get)]	
 	contentSymbol = ''
@@ -62,8 +72,21 @@ def prepareDictionaryFile(dict, filename, transSymbols):
 	length = 0
 	countNumber = 0
 	for symbol, value in dict.items():
-		while symbol in transSymbols.keys():
+		#print(transSymbols)
+		#print(symbol)
+		# if symbol in transSymbols.keys():
+		curSymbol = ''
+		if symbol in transSymbols.keys():
 			symbol = transSymbols[symbol]
+			for idx in range(len(symbol)):  #for idx, char in enumerate(symbol):
+				if symbol[idx] in transSymbols.keys():
+					curSymbol += transSymbols[symbol[idx]]
+					#symbol = transSymbols[symbol[idx:]]
+				else:
+					curSymbol += symbol[idx]
+		else:
+			curSymbol = symbol
+		symbol = curSymbol
 		contentSymbol += (symbol + '†')
 		contentNumber += (str(value) + '†')
 		with open( filename + 'Symbol.txt', 'w+') as f:
