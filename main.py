@@ -7,7 +7,7 @@ from Decoder import Decoder
 
 input = ['input.txt', 'lorem_ipsum.txt', 'cholda_teaching.txt', 'cpp.txt', 'json.txt', 'pantadeusz.txt']
 inputIndex = 0
-maxIteration = 10
+maxIteration = 6
 
 def Decode(input, msg, coder):
     print("----------")
@@ -23,14 +23,17 @@ def Initiate(singleCharDict):
     coder.Run()
     return coder
 
+def PrintStatistics(rozmiar):
+    rozmiar = collections.OrderedDict(sorted(rozmiar.items(), key = lambda rozmiar: int(rozmiar[0])))
+    for idx in rozmiar.keys():
+        print("Iteracja: " + idx + " stosunek rozmiaru: " + str(rozmiar[idx]/inputsize))
+
 text = getPlainTextFromFile(input[inputIndex])
 inputsize = os.path.getsize(input[inputIndex])
 optimalSize = os.path.getsize(input[inputIndex])
 continueCondition = True
 it = 0
 rozmiar = {}
-
-
 
 while continueCondition:
     singleCharDict = getTextStatistics(text)
@@ -44,10 +47,12 @@ while continueCondition:
     rozmiar[str(it)] = dictSize + codeSize
     optimalSize = (dictSize + codeSize)
     bestCharDict = singleCharDict
-    multiCharDict = getNCharStatistics(text)
+    multiCharDict = getNCharStatistics(text, 1)
     mostFrequentSymbol = maxElement(multiCharDict)
-
     newSymbol = getFirstUnusedSymbol(multiCharDict, transSymbols)
+    print("Najczestszy symbol: " + mostFrequentSymbol)
+    print("Podmieniono na: " + newSymbol)
+
     if newSymbol == '†':
         break
     bestText = text
@@ -64,15 +69,10 @@ while continueCondition:
 coder = Initiate(bestCharDict)
 msg = coder.code(bestText)
 
+print("Najblepszy słownik: " + str(transSymbols))
 Decode(bestText, msg, coder)
 
 dictSize = prepareDictionaryFile(bestCharDict, 'new', transSymbols)
 codeSize = coder.toFile(msg,'ostatecznyOutput.bin')
 
-rozmiar = collections.OrderedDict(sorted(rozmiar.items(), key = lambda rozmiar: int(rozmiar[0])))
-
-for idx in rozmiar.keys():
-    print("Iteracja: " + idx + " stosunek rozmiaru: " + str(rozmiar[idx]/inputsize))
-
-
-
+PrintStatistics(rozmiar)

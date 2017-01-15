@@ -34,10 +34,9 @@ def getPlainTextFromFile(filename):
 		print('Error with input file.')
 	return(text)
 
-def getNCharSet(text):
+def getNCharSet(text, cnt):
 	charList = []
-	#for k in range(0,int(math.sqrt(len(text)))):	
-	for k in range(0,1):	
+	for k in range(0,cnt):
 		for i in range(len(text)-(k+1)):
 			symbol = text[i:(i+k+2)]
 			charList.append(symbol)
@@ -53,8 +52,8 @@ def getTextStatistics(text):
 	statsDict = dict(zip(characters, number))
 	return(statsDict)
 
-def getNCharStatistics(text):
-	characters = getNCharSet(text)
+def getNCharStatistics(text, cnt):
+	characters = getNCharSet(text, cnt)
 	number = []
 	for char in characters:
 		count = text.count(char)

@@ -1,10 +1,6 @@
-from TreeBuilder import TreeBuilder, HoffmanNode
-from temp import *
-import binascii
-import time
+from TreeBuilder import TreeBuilder
 from struct import unpack
 from Coder import Coder
-import os
 
 class Decoder:
 	def __init__(self, symbolFile, numberFile, coder = None):
