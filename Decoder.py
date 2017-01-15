@@ -4,6 +4,7 @@ from Coder import Coder
 
 class Decoder:
 	def __init__(self, symbolFile, numberFile, coder = None):
+		self.out = ''
 		if (coder == None):
 			self.symbolContent = open(symbolFile).read()
 			self.numberContent = open(numberFile).read()
@@ -34,7 +35,7 @@ class Decoder:
 			return (self.Decode(content))
 
 	def Decode(self, input):
-		out = ''
+		self.out = ''
 		match = ''
 		for idx in range(0, len(input) - 5, 4):
 			binaryString = str((bin(unpack('<i', input[idx:idx + 4])[0]).replace("-", '').replace("0b", '')))
@@ -46,21 +47,42 @@ class Decoder:
 				if match in self.coder.getCodeDict().values():
 					for el in self.coder.getCodeDict():
 						if self.coder.getCodeDict()[el] == match:
-							out += el
+							self.out += el
 					match = ''
-		return out
+		return self.out
 
 	def DecodeString(self, input):
-		out = ''
+		self.out = ''
 		match = ''
 		for sign in input:
 			match += sign
 			if match in self.coder.getCodeDict().values():
 				for el in self.coder.getCodeDict():
 					if self.coder.getCodeDict()[el] == match:
-						out += el
+						self.out += el
 				match = ''
-		return out
+		return self.out
+
+	def DecodeAllLevelsString(self, input, transNodes = {}):
+		self.out = ''
+		match = ''
+		for sign in input:
+			match += sign
+			if match in self.coder.getCodeDict().values():
+				for element in self.coder.getCodeDict():
+					if self.coder.getCodeDict()[element] == match:
+						if element in transNodes.keys():
+							self.RecurencyDecode(element, transNodes)
+				match = ''
+		return self.out
+
+	def RecurencyDecode(self, input, transNodes):
+		for element in input:
+			if element in transNodes.keys():
+				self.RecurencyDecode(transNodes[element], transNodes)
+			else:
+				self.out += element
+
 
 #decoder = Decoder("newSymbol.txt", "newNumber.txt")
 #print(decoder.DecodeFile("ostatecznyOutput.bin"))

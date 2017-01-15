@@ -9,11 +9,14 @@ input = ['input.txt', 'lorem_ipsum.txt', 'cholda_teaching.txt', 'cpp.txt', 'json
 inputIndex = 0
 maxIteration = 6
 
-def Decode(input, msg, coder):
+def Decode(input, msg, coder, transSymbols = None):
     print("----------")
     print("Wejscie: " + input)
     decoder = Decoder(None, None, coder)
-    print("Zdekodowano: " + decoder.DecodeString(msg))
+    if transSymbols != None:
+        print("Zdekodowano: " + decoder.DecodeAllLevelsString(msg, transSymbols))
+    else:
+        print("Zdekodowano: " + decoder.DecodeString(msg))
     print("----------")
 
 def Initiate(singleCharDict):
@@ -57,7 +60,7 @@ while continueCondition:
         break
     bestText = text
     text = text.replace(mostFrequentSymbol, newSymbol)
-    transSymbols.update({newSymbol:mostFrequentSymbol})
+    transSymbols[newSymbol] = mostFrequentSymbol
 
     Decode(bestText, msg, coder)
 
@@ -70,7 +73,7 @@ coder = Initiate(bestCharDict)
 msg = coder.code(bestText)
 
 print("Najblepszy słownik: " + str(transSymbols))
-Decode(bestText, msg, coder)
+Decode(bestText, msg, coder, transSymbols)
 
 dictSize = prepareDictionaryFile(bestCharDict, 'new', transSymbols)
 codeSize = coder.toFile(msg,'ostatecznyOutput.bin')
