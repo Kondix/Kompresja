@@ -62,8 +62,6 @@ while continueCondition:
     text = text.replace(mostFrequentSymbol, newSymbol)
     transSymbols[newSymbol] = mostFrequentSymbol
 
-    Decode(bestText, msg, coder)
-
     it += 1
     if it==maxIteration:
         break

@@ -73,24 +73,16 @@ def translateDown(symbol, transSymbols, value = ''):
 	print(value)
 	return(value)
 
-def prepareDictionaryFile(dict, filename, transSymbols):
-	maxNumber = dict[max(dict, key=dict.get)]	
+def prepareDictionaryFileBackup(dict, filename, transSymbols):
 	contentSymbol = ''
 	contentNumber = ''
-	length = 0
-	countNumber = 0
 	curSymbol = ''
 	for symbol, value in dict.items():
-		#print(transSymbols)
-		# #print(symbol)
-		# if symbol in transSymbols.keys():
-		# 	curSymbol = translateDown(symbol,transSymbols)
 		if symbol in transSymbols.keys():
 			symbol = transSymbols[symbol]
-			for idx in range(len(symbol)):  #for idx, char in enumerate(symbol):
+			for idx in range(len(symbol)):
 				if symbol[idx] in transSymbols.keys():
 					curSymbol += transSymbols[symbol[idx]]
-					#symbol = transSymbols[symbol[idx:]]
 				else:
 					curSymbol += symbol[idx]
 		else:
@@ -104,6 +96,32 @@ def prepareDictionaryFile(dict, filename, transSymbols):
 			f.write(contentNumber)
 	totalLength = os.path.getsize(filename + 'Number.txt') + os.path.getsize( filename + 'Symbol.txt')
 	return(totalLength)
+
+def prepareDictionaryFile(dict, filename, transSymbols):
+	contentSymbol = ''
+	contentNumber = ''
+	curSymbol = ''
+	for symbol, value in dict.items():
+
+		curSymbol = TranslateSymbol(symbol, transSymbols, curSymbol)
+		print(curSymbol)
+		symbol = curSymbol
+		contentSymbol += (symbol + '†')
+		contentNumber += (str(value) + '†')
+		with open( filename + 'Symbol.txt', 'w+') as f:
+			f.write(contentSymbol)
+		with open( filename + 'Number.txt', 'w+') as f:
+			f.write(contentNumber)
+	totalLength = os.path.getsize(filename + 'Number.txt') + os.path.getsize( filename + 'Symbol.txt')
+	return(totalLength)
+
+def TranslateSymbol(input, transSymbols, translated):
+	for element in input:
+		if element in transSymbols.keys():
+			translated = TranslateSymbol(transSymbols[element], transSymbols, translated)
+		else:
+			translated += element
+	return translated
 
 def maxElement(d):
 	mostFrequentSymbol = max(d, key=d.get)
