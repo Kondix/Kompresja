@@ -6,49 +6,65 @@ from struct import unpack
 from Coder import Coder
 import os
 
-with open("newSymbol.txt") as x:
-	symbolContent = x.read()
-with open("newNumber.txt") as x:
-	numberContent = x.read()
+class Decoder:
+	def __init__(self, symbolFile, numberFile, coder = None):
+		if (coder == None):
+			self.symbolContent = open(symbolFile).read()
+			self.numberContent = open(numberFile).read()
+			self.statistics = {}
+			self.UpdateStatistics()
+			self.BuildCode()
+		else:
+			self.coder = coder
 
-statistics = {}
+	def Run(self):
+		self.UpdateStatistics()
 
-symbols = symbolContent[:-1].split('†')
-numbers = numberContent[:-1].split('†')
-for i in range(len(symbols)):
-	statistics.update({symbols[i]:int(numbers[i])})
+	def UpdateStatistics(self):
+		symbols = self.symbolContent[:-1].split('†')
+		numbers = self.numberContent[:-1].split('†')
+		for i in range(len(symbols)):
+			self.statistics.update({symbols[i]: int(numbers[i])})
 
-treeBuilder = TreeBuilder(statistics)
-treeBuilder.Run()
+	def BuildCode(self):
+		treeBuilder = TreeBuilder(self.statistics)
+		treeBuilder.Run()
+		self.coder = Coder(treeBuilder.GetRoot()[0])
+		self.coder.Run()
 
-decoderDict = {}
+	def DecodeFile(self, fileToDecode):
+		with open(fileToDecode, encoding="ISO-8859-1") as file:
+			content = bytearray(file.read().encode(encoding="ISO-8859-1"))
+			return (self.Decode(content))
 
-coder = Coder(treeBuilder.GetRoot()[0])
-coder.Run()
+	def Decode(self, input):
+		out = ''
+		match = ''
+		for idx in range(0, len(input) - 5, 4):
+			binaryString = str((bin(unpack('<i', input[idx:idx + 4])[0]).replace("-", '').replace("0b", '')))
+			#paddingLen = 32 - (len(binaryString) % 32)
+			#padding = '0' * paddingLen
+			#binaryString = binaryString + padding
+			for a in binaryString:
+				match += a
+				if match in self.coder.getCodeDict().values():
+					for el in self.coder.getCodeDict():
+						if self.coder.getCodeDict()[el] == match:
+							out += el
+					match = ''
+		return out
 
-coder.printCodeDict()
-
-for symbol in symbols:
-	seq = coder.codeSingle(symbol)
-	decoderDict.update({seq:symbol})
-
-with open('ostatecznyOutput.bin', encoding = "ISO-8859-1") as file:
-	content = file.read()
-	b = bytearray(content.encode(encoding = "ISO-8859-1"))
-	out = ''
-	match = ''
-	for idx in range(0, len(content)-5, 4):
-		binaryStream = unpack('<i', b[idx:idx+4])
-		binaryString= str((bin(binaryStream[0]).replace("-", '').replace("0b", '')))
-		paddingLen = 32 - (len(binaryString) % 32)
-		padding = '0' * paddingLen
-		binaryString = binaryString + padding
-		for a in binaryString:
-			match += a
-			if match in coder.getCodeDict().values():
-				for el in coder.getCodeDict():
-					if coder.getCodeDict()[el] == match:
+	def DecodeString(self, input):
+		out = ''
+		match = ''
+		for sign in input:
+			match += sign
+			if match in self.coder.getCodeDict().values():
+				for el in self.coder.getCodeDict():
+					if self.coder.getCodeDict()[el] == match:
 						out += el
 				match = ''
-	print(out)
+		return out
 
+#decoder = Decoder("newSymbol.txt", "newNumber.txt")
+#print(decoder.DecodeFile("ostatecznyOutput.bin"))
