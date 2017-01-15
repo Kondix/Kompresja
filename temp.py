@@ -102,10 +102,9 @@ def prepareDictionaryFile(dict, filename, transSymbols):
 	contentNumber = ''
 	curSymbol = ''
 	for symbol, value in dict.items():
-
 		curSymbol = TranslateSymbol(symbol, transSymbols, curSymbol)
-		print(curSymbol)
 		symbol = curSymbol
+		curSymbol = ''
 		contentSymbol += (symbol + '†')
 		contentNumber += (str(value) + '†')
 		with open( filename + 'Symbol.txt', 'w+') as f:
